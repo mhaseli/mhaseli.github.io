@@ -9,5 +9,5 @@ paperurl: "https://arxiv.org/pdf/2311.13033.pdf"
 citation: "M. Haseli and J. Cortés. (2023). &quot;Efficient Computation of Invariance Proximity: Closed-Form Error Bounds for Finite-Dimensional Koopman-Based Models.&quot; <i>IEEE Control Systems Letters (Submitted)</i>."
 ---
 
-[Download paper here](https://arxiv.org/pdf/2311.13033.pdf)
+$$ \mathcal{K} \phi = \lambda \phi $$
 
