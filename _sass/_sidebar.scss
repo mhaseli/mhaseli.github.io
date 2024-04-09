@@ -143,6 +143,7 @@
 
 .author__bio {
   margin: 0;
+  max-width: 175px;
 
   @include breakpoint($large) {
     margin-top: 10px;
@@ -151,9 +152,9 @@
 }
 
 .author__urls-wrapper {
+  max-width: 175px;
   position: relative;
   display: table-cell;
-  vertical-align: middle;
   font-family: $sans-serif;
   z-index: 10;
   position: relative;
@@ -183,7 +184,6 @@
   position: absolute;
   right: 0;
   margin-top: 15px;
-  padding: 10px;
   list-style-type: none;
   border: 1px solid $border-color;
   border-radius: $border-radius;
@@ -237,7 +237,8 @@
   }
 
   li {
-    white-space: nowrap;
+    width: 175px;
+    white-space: initial;
   }
 
   a {
