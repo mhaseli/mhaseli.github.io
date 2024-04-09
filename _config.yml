@@ -24,9 +24,9 @@ author:
   avatar           : "Masih.png"
   name             : "Masih Haseli"
   pronouns         : # example: "she/her"  
-  bio              : "Postdoctoral Researcher at the University of California, San Diego"
+  bio              : "Postdoc at UC San Diego" # "Postdoctoral Researcher at the University of California, San Diego"
   location         : "San Diego, CA"
-  employer         : "University of California, San Diego"
+  employer         : "UC San Diego"
   uri              : # URL
   email            : "mhaseli@ucsd.edu" 
 
@@ -107,7 +107,7 @@ staticman:
       options:
         format           : "iso8601" # "iso8601" (default), "timestamp-seconds", "timestamp-milliseconds"
 atom_feed:
-  hide                   : false     # change to true to hide the RSS feed in the footer
+  hide                   : true     # change to true to hide the RSS feed in the footer % Changed to true by NB
   path                   : # blank (default) uses feed.xml
 
 
@@ -202,7 +202,10 @@ collections:
   teaching:
     output: true
     permalink: /:collection/:path/
-  publications:
+  journal:
+    output: true
+    permalink: /:collection/:path/
+  conference:
     output: true
     permalink: /:collection/:path/
   portfolio:
@@ -242,10 +245,19 @@ defaults:
       author_profile: true
       share: true
       comments: true
-  # _publications
+  # _journal
   - scope:
       path: ""
-      type: publications
+      type: journal
+    values:
+      layout: single
+      author_profile: true
+      share: true
+      comments: true
+  # _conference
+  - scope:
+      path: ""
+      type: conference
     values:
       layout: single
       author_profile: true
