@@ -7,4 +7,4 @@ tags:
   - Tutorial
 ---
 
-
+$$ \mathcal{K} \phi = \lambda \phi $$
