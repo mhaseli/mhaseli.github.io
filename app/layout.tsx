@@ -107,6 +107,8 @@ const jsonLd = {
   ],
 };
 
+import { GoogleAnalytics } from "@next/third-parties/google";
+
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -139,6 +141,7 @@ export default function RootLayout({
           </main>
           <Footer />
         </ThemeProvider>
+        <GoogleAnalytics gaId="G-HWMR6ZLHKG" />
       </body>
     </html>
   );
