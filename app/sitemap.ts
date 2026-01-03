@@ -1,5 +1,7 @@
 import { MetadataRoute } from "next";
 
+export const dynamic = "force-static";
+
 export default function sitemap(): MetadataRoute.Sitemap {
     const siteUrl = "https://mhaseli.github.io";
     const currentDate = new Date().toISOString();

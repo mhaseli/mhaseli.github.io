@@ -15,8 +15,7 @@ permissions:
   pages: write
   id-token: write
 
-# Allow only one concurrent deployment, skipping runs queued between the run in-progress and latest queued.
-# However, do NOT cancel in-progress runs as we want to allow these production deployments to complete.
+# Allow only one concurrent deployment
 concurrency:
   group: "pages"
   cancel-in-progress: false
@@ -43,6 +42,20 @@ jobs:
 
       - name: Build with Next.js
         run: npm run build
+        env:
+          NODE_ENV: production
+
+      - name: Verify build output
+        run: |
+          echo "Checking if out directory exists..."
+          ls -la
+          if [ -d "out" ]; then
+            echo "✓ out directory exists"
+            ls -la out/
+          else
+            echo "✗ out directory not found!"
+            exit 1
+          fi
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
