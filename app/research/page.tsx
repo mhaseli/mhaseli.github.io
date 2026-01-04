@@ -183,7 +183,7 @@ export default function ResearchPage() {
                             <motion.div
                                 key={index}
                                 variants={itemVariants}
-                                className="flex items-start gap-4 p-4 bg-secondary/30 dark:bg-secondary/20 rounded-lg border border-border hover:border-accent/30 transition-colors"
+                                className="flex items-start gap-4 p-4 bg-secondary/30 dark:bg-secondary/20 rounded-lg border-l-2 border-transparent hover:border-accent hover:bg-accent/5 hover:translate-x-1 transition-all duration-150 ease-out cursor-default"
                             >
                                 <div className="flex-shrink-0 w-10 h-10 bg-accent/10 dark:bg-accent/20 rounded-full flex items-center justify-center">
                                     <Award size={20} className="text-accent" />
