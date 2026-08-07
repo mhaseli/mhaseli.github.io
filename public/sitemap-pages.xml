@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <url><loc>https://mhaseli.github.io/</loc></url>
+  <url><loc>https://mhaseli.github.io/research/</loc></url>
+  <url><loc>https://mhaseli.github.io/publications/</loc></url>
+  <url><loc>https://mhaseli.github.io/awards/</loc></url>
+  <url><loc>https://mhaseli.github.io/talks/</loc></url>
+  <url><loc>https://mhaseli.github.io/publications/two-roads-to-koopman-operator-theory-for-control/</loc></url>
+  <url><loc>https://mhaseli.github.io/publications/modeling-nonlinear-control-systems-via-koopman-control-family/</loc></url>
+  <url><loc>https://mhaseli.github.io/publications/existence-koopman-linear-embeddings-controlled-nonlinear-systems/</loc></url>
+  <url><loc>https://mhaseli.github.io/publications/recursive-forward-backward-edmd/</loc></url>
+  <url><loc>https://mhaseli.github.io/publications/koopman-operators-in-robot-learning/</loc></url>
+  <url><loc>https://mhaseli.github.io/publications/invariance-proximity/</loc></url>
+  <url><loc>https://mhaseli.github.io/publications/generalizing-dynamic-mode-decomposition/</loc></url>
+  <url><loc>https://mhaseli.github.io/publications/temporal-forward-backward-consistency/</loc></url>
+  <url><loc>https://mhaseli.github.io/publications/parallel-learning-koopman-eigenfunctions/</loc></url>
+  <url><loc>https://mhaseli.github.io/publications/learning-koopman-eigenfunctions-symmetric-subspace-decomposition/</loc></url>
+  <url><loc>https://mhaseli.github.io/publications/control-forward-backward-consistency-koopman-control-family/</loc></url>
+  <url><loc>https://mhaseli.github.io/publications/koopman-operator-extensions-for-control/</loc></url>
+  <url><loc>https://mhaseli.github.io/publications/real-time-learning-predictive-dynamic-obstacle-models/</loc></url>
+  <url><loc>https://mhaseli.github.io/publications/data-driven-approximation-koopman-invariant-subspaces/</loc></url>
+  <url><loc>https://mhaseli.github.io/publications/fast-identification-koopman-invariant-subspaces/</loc></url>
+  <url><loc>https://mhaseli.github.io/publications/efficient-identification-linear-evolutions/</loc></url>
+  <url><loc>https://mhaseli.github.io/publications/approximating-koopman-operator-using-noisy-data/</loc></url>
+  <url><loc>https://mhaseli.github.io/publications/data-driven-system-analysis-koopman-operator/</loc></url>
+</urlset>
