@@ -13,8 +13,27 @@ export const metadata: Metadata = {
         "data-driven methods",
     ],
     openGraph: {
+        type: "website",
+        url: "https://mhaseli.github.io/publications/",
         title: "Publications | Masih Haseli",
         description: "Academic publications on Koopman operator theory, data-driven control, and robotics.",
+        images: [
+            {
+                url: "/images/profile_photo.png",
+                width: 400,
+                height: 400,
+                alt: "Masih Haseli",
+            },
+        ],
+    },
+    twitter: {
+        card: "summary",
+        title: "Publications | Masih Haseli",
+        description: "Academic publications on Koopman operator theory, data-driven control, and robotics.",
+        images: ["/images/profile_photo.png"],
+    },
+    alternates: {
+        canonical: "https://mhaseli.github.io/publications/",
     },
 };
 

@@ -1,15 +1,17 @@
 "use client";
 
-import { publications } from "@/lib/data";
+import type { Publication } from "@/lib/data";
+import { orderedPublications } from "@/lib/publications";
 import { LinkIcon, FileText, ChevronDown, ChevronUp } from "lucide-react";
 import { clsx } from "clsx";
 import { motion, AnimatePresence } from "framer-motion";
 import { useState } from "react";
+import Link from "next/link";
 
 export default function PublicationList() {
-    const journals = publications.filter((p) => p.type === "journal");
-    const conferences = publications.filter((p) => p.type === "conference");
-    const theses = publications.filter((p) => p.type === "thesis");
+    const journals = orderedPublications.filter((p) => p.type === "journal");
+    const conferences = orderedPublications.filter((p) => p.type === "conference");
+    const theses = orderedPublications.filter((p) => p.type === "thesis");
 
     return (
         <section className="py-8 space-y-10">
@@ -27,7 +29,7 @@ function PublicationSection({
     sectionId,
 }: {
     title: string;
-    items: typeof publications;
+    items: Publication[];
     sectionId: string;
 }) {
     if (items.length === 0) return null;
@@ -48,7 +50,7 @@ function PublicationSection({
                 transition={{ duration: 0.4 }}
                 className="flex items-center gap-4 mb-6"
             >
-                <h2 className="text-2xl font-serif font-medium text-foreground">
+                <h2 className="text-2xl font-sans font-medium text-foreground">
                     {title}
                 </h2>
                 <motion.div
@@ -69,8 +71,9 @@ function PublicationSection({
     );
 }
 
-function PublicationRow({ pub, index }: { pub: (typeof publications)[0]; index: number }) {
+function PublicationRow({ pub, index }: { pub: Publication; index: number }) {
     const [isExpanded, setIsExpanded] = useState(false);
+    const abstractId = `${pub.id}-abstract`;
 
     // Highlight author name
     const highlightAuthor = (authors: string) => {
@@ -101,7 +104,7 @@ function PublicationRow({ pub, index }: { pub: (typeof publications)[0]; index: 
         >
             {/* Numbering */}
             <div className="flex-shrink-0 w-8 text-right">
-                <span className="text-muted-foreground/60 font-serif text-lg font-medium group-hover:text-accent/80 transition-colors">
+                <span className="text-muted-foreground/60 font-sans text-lg font-medium group-hover:text-accent/80 transition-colors">
                     {index}.
                 </span>
             </div>
@@ -111,16 +114,12 @@ function PublicationRow({ pub, index }: { pub: (typeof publications)[0]; index: 
                 <div className="flex flex-col gap-1">
                     <div className="flex justify-between items-start gap-4">
                         <h3 className={clsx(
-                            "text-xl font-serif font-medium leading-tight tracking-tight",
+                            "text-xl font-sans font-medium leading-tight tracking-tight",
                             pub.award ? "text-amber-900 dark:text-amber-100" : "text-foreground group-hover:text-accent transition-colors duration-150"
                         )}>
-                            {pub.links && pub.links.length > 0 ? (
-                                <a href={pub.links[0].url} target="_blank" rel="noreferrer">
-                                    {pub.title}
-                                </a>
-                            ) : (
-                                <span>{pub.title}</span>
-                            )}
+                            <Link href={`/publications/${pub.slug}`}>
+                                {pub.title}
+                            </Link>
                         </h3>
                     </div>
 
@@ -129,7 +128,7 @@ function PublicationRow({ pub, index }: { pub: (typeof publications)[0]; index: 
                     </p>
 
                     <div className="flex flex-wrap items-baseline gap-2 text-sm mt-1">
-                        <span className="font-serif italic text-foreground/90">
+                        <span className="font-sans italic text-foreground/90">
                             {pub.venue}
                         </span>
                         <span className="text-muted-foreground">•</span>
@@ -159,6 +158,8 @@ function PublicationRow({ pub, index }: { pub: (typeof publications)[0]; index: 
                         {pub.abstract && (
                             <button
                                 onClick={() => setIsExpanded(!isExpanded)}
+                                aria-expanded={isExpanded}
+                                aria-controls={abstractId}
                                 className={clsx(
                                     "flex items-center gap-1.5 text-xs font-semibold px-3 py-1.5 rounded-full transition-all duration-300",
                                     isExpanded
@@ -171,8 +172,8 @@ function PublicationRow({ pub, index }: { pub: (typeof publications)[0]; index: 
                             </button>
                         )}
 
-                        {/* Links - Badged (Excluding the first link which is the Title link) */}
-                        {pub.links?.slice(1).map((link) => (
+                        {/* External resources stay separate from the publication detail page. */}
+                        {pub.links?.map((link) => (
                             <a
                                 key={link.name}
                                 href={link.url}
@@ -183,8 +184,8 @@ function PublicationRow({ pub, index }: { pub: (typeof publications)[0]; index: 
                                     "bg-secondary/50 border-border/40 text-muted-foreground hover:bg-accent hover:text-accent-foreground hover:border-accent"
                                 )}
                             >
-                                {link.name === "PDF" && <FileText className="w-3.5 h-3.5" />}
-                                {link.name !== "PDF" && <LinkIcon className="w-3.5 h-3.5" />}
+                                {/(pdf|journal version)/i.test(link.name) && <FileText className="w-3.5 h-3.5" />}
+                                {!/(pdf|journal version)/i.test(link.name) && <LinkIcon className="w-3.5 h-3.5" />}
                                 {link.name}
                             </a>
                         ))}
@@ -194,13 +195,14 @@ function PublicationRow({ pub, index }: { pub: (typeof publications)[0]; index: 
                     <AnimatePresence>
                         {isExpanded && pub.abstract && (
                             <motion.div
+                                id={abstractId}
                                 initial={{ height: 0, opacity: 0 }}
                                 animate={{ height: "auto", opacity: 1 }}
                                 exit={{ height: 0, opacity: 0 }}
                                 className="overflow-hidden"
                             >
                                 <div className="mt-2 p-4 bg-secondary/30 border-l-2 border-accent rounded-r-xl rounded-bl-xl">
-                                    <p className="text-sm text-foreground/90 leading-relaxed max-w-4xl font-serif text-justify">
+                                    <p className="text-sm text-foreground/90 leading-relaxed max-w-4xl font-sans text-justify">
                                         {pub.abstract}
                                     </p>
                                 </div>

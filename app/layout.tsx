@@ -1,26 +1,26 @@
 import type { Metadata } from "next";
-import { Source_Sans_3, Fraunces } from "next/font/google";
+import { Source_Sans_3 } from "next/font/google";
 import "./globals.css";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { ThemeProvider } from "@/components/ThemeProvider";
 import { clsx } from "clsx";
 
-const sourceSans = Source_Sans_3({ subsets: ["latin"], variable: "--font-sans" });
-const fraunces = Fraunces({ subsets: ["latin"], variable: "--font-serif", axes: ["SOFT", "WONK", "opsz"] });
+const sourceSans = Source_Sans_3({ subsets: ["latin"], variable: "--font-source-sans" });
 
 const siteUrl = "https://mhaseli.github.io";
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
   title: {
-    default: "Masih Haseli - Postdoctoral Scholar at Caltech",
+    default: "Masih Haseli - Postdoctoral Scholar Research Associate at Caltech",
     template: "%s | Masih Haseli",
   },
-  description: "Academic website of Masih Haseli, Postdoctoral Scholar at Caltech. Research in Koopman operator theory, data-driven control, dynamical systems, and robotics.",
+  description: "Academic website of Masih Haseli, Postdoctoral Scholar Research Associate at Caltech. Research in Koopman operator theory, data-driven control, dynamical systems, and robotics.",
   keywords: [
     "Masih Haseli",
     "Postdoctoral Scholar",
+    "Postdoctoral Scholar Research Associate",
     "Caltech",
     "Koopman operator",
     "Control theory",
@@ -38,7 +38,7 @@ export const metadata: Metadata = {
     locale: "en_US",
     url: siteUrl,
     siteName: "Masih Haseli - Academic Website",
-    title: "Masih Haseli - Postdoctoral Scholar at Caltech",
+    title: "Masih Haseli - Postdoctoral Scholar Research Associate at Caltech",
     description: "Research in Koopman operator theory, data-driven control, dynamical systems, and robotics.",
     images: [
       {
@@ -51,7 +51,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary",
-    title: "Masih Haseli - Postdoctoral Scholar at Caltech",
+    title: "Masih Haseli - Postdoctoral Scholar Research Associate at Caltech",
     description: "Research in Koopman operator theory, data-driven control, dynamical systems, and robotics.",
     images: ["/images/profile_photo.png"],
   },
@@ -82,7 +82,7 @@ const jsonLd = {
   name: "Masih Haseli",
   url: siteUrl,
   image: `${siteUrl}/images/profile_photo.png`,
-  jobTitle: "Postdoctoral Scholar",
+  jobTitle: "Postdoctoral Scholar Research Associate",
   worksFor: {
     "@type": "Organization",
     name: "California Institute of Technology",
@@ -125,7 +125,6 @@ export default function RootLayout({
       <body
         className={clsx(
           sourceSans.variable,
-          fraunces.variable,
           "antialiased bg-background text-foreground min-h-screen flex flex-col font-sans transition-colors duration-300"
         )}
       >

@@ -42,7 +42,7 @@ export default function Hero() {
                         initial={{ opacity: 0, y: 10 }}
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ duration: 0.4, delay: 0.3 }}
-                        className="text-4xl md:text-5xl font-bold text-foreground font-serif tracking-tight"
+                        className="text-4xl md:text-5xl font-bold text-foreground font-sans tracking-tight"
                     >
                         {profile.name}
                     </motion.h1>
@@ -50,7 +50,7 @@ export default function Hero() {
                         initial={{ opacity: 0, y: 10 }}
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ duration: 0.4, delay: 0.4 }}
-                        className="text-xl md:text-2xl text-accent font-medium mt-2 font-serif"
+                        className="text-xl md:text-2xl text-accent font-medium mt-2 font-sans"
                     >
                         {profile.title}
                     </motion.h2>
@@ -95,7 +95,7 @@ export default function Hero() {
                     className="prose dark:prose-invert max-w-none text-muted-foreground text-justify"
                 >
                     <p>
-                        I am a postdoctoral scholar in Computing and Mathematical Sciences at Caltech, advised by <a href="https://www.eas.caltech.edu/people/jburdick" target="_blank" rel="noreferrer" className="text-accent hover:underline font-medium">Prof. Joel W. Burdick</a>. Previously, I was a postdoctoral scholar in the Department of Mechanical and Aerospace Engineering at the University of California San Diego with <a href="http://terrano.ucsd.edu/jorge/" target="_blank" rel="noreferrer" className="text-accent hover:underline font-medium">Prof. Jorge Cortés</a>.
+                        I am a postdoctoral scholar research associate in Computing and Mathematical Sciences at Caltech, advised by <a href="https://www.eas.caltech.edu/people/jburdick" target="_blank" rel="noreferrer" className="text-accent hover:underline font-medium">Prof. Joel W. Burdick</a>. Previously, I was a postdoctoral scholar in the Department of Mechanical and Aerospace Engineering at the University of California San Diego with <a href="http://terrano.ucsd.edu/jorge/" target="_blank" rel="noreferrer" className="text-accent hover:underline font-medium">Prof. Jorge Cortés</a>.
                         I received my Ph.D. in Engineering Sciences (Mechanical Engineering) from the University of California San Diego in 2022.
                     </p>
                     <motion.p

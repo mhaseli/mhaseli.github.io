@@ -22,23 +22,26 @@ export default function PublicationsPage() {
                 >
                     <a
                         href="#journals"
+                        aria-label="Jump to journal articles"
                         className="group inline-flex items-center gap-2 px-4 py-2 text-sm font-medium text-muted-foreground hover:text-accent hover:bg-accent/10 rounded-full transition-all duration-200"
                     >
-                        <BookOpen size={16} className="text-accent/70 group-hover:text-accent transition-colors" />
+                        <BookOpen size={16} aria-hidden="true" className="text-accent/70 group-hover:text-accent transition-colors" />
                         <span className="hidden sm:inline">Journal Articles</span>
                     </a>
                     <a
                         href="#conferences"
+                        aria-label="Jump to conference proceedings"
                         className="group inline-flex items-center gap-2 px-4 py-2 text-sm font-medium text-muted-foreground hover:text-accent hover:bg-accent/10 rounded-full transition-all duration-200"
                     >
-                        <Presentation size={16} className="text-accent/70 group-hover:text-accent transition-colors" />
+                        <Presentation size={16} aria-hidden="true" className="text-accent/70 group-hover:text-accent transition-colors" />
                         <span className="hidden sm:inline">Conference Proceedings</span>
                     </a>
                     <a
                         href="#theses"
+                        aria-label="Jump to theses"
                         className="group inline-flex items-center gap-2 px-4 py-2 text-sm font-medium text-muted-foreground hover:text-accent hover:bg-accent/10 rounded-full transition-all duration-200"
                     >
-                        <ScrollText size={16} className="text-accent/70 group-hover:text-accent transition-colors" />
+                        <ScrollText size={16} aria-hidden="true" className="text-accent/70 group-hover:text-accent transition-colors" />
                         <span className="hidden sm:inline">Theses</span>
                     </a>
                     <div className="hidden sm:block w-px h-6 bg-border/50 mx-1 self-center" />
@@ -46,15 +49,16 @@ export default function PublicationsPage() {
                         href={profile.scholar}
                         target="_blank"
                         rel="noreferrer"
+                        aria-label="Open Masih Haseli's Google Scholar profile"
                         className="group inline-flex items-center gap-2 px-4 py-2 text-sm font-medium text-muted-foreground hover:text-accent hover:bg-accent/10 rounded-full transition-all duration-200"
                     >
-                        <GraduationCap size={16} className="text-accent/70 group-hover:text-accent transition-colors" />
+                        <GraduationCap size={16} aria-hidden="true" className="text-accent/70 group-hover:text-accent transition-colors" />
                         <span className="hidden sm:inline">Google Scholar</span>
                     </a>
                 </motion.nav>
             </div>
 
-            <h1 className="text-3xl md:text-4xl font-bold mb-8 text-zinc-900 dark:text-zinc-50 font-serif tracking-tight">
+            <h1 className="text-3xl md:text-4xl font-bold mb-8 text-zinc-900 dark:text-zinc-50 font-sans tracking-tight">
                 Publications
             </h1>
 

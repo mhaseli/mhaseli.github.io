@@ -3,8 +3,8 @@
 import Image from "next/image";
 import Link from "next/link";
 import { motion } from "framer-motion";
-import { researchThemes, awards, publications } from "@/lib/data";
-import { Award, ArrowRight, Lightbulb, Trophy, BookOpen } from "lucide-react";
+import { researchThemes } from "@/lib/data";
+import { ArrowRight, Lightbulb, Trophy, BookOpen } from "lucide-react";
 
 const containerVariants = {
     hidden: { opacity: 0 },
@@ -57,13 +57,6 @@ export default function ResearchPage() {
                         <Lightbulb size={16} className="text-accent/70 group-hover:text-accent transition-colors" />
                         Research Themes
                     </a>
-                    <a
-                        href="#awards"
-                        className="group inline-flex items-center gap-2 px-4 py-2 text-sm font-medium text-muted-foreground hover:text-accent hover:bg-accent/10 rounded-full transition-all duration-200"
-                    >
-                        <Trophy size={16} className="text-accent/70 group-hover:text-accent transition-colors" />
-                        Awards
-                    </a>
                 </motion.nav>
             </div>
 
@@ -75,7 +68,7 @@ export default function ResearchPage() {
                 transition={{ duration: 0.6, delay: 0.1 }}
                 className="mb-16 scroll-mt-32"
             >
-                <h1 className="text-3xl md:text-4xl font-bold mb-6 text-zinc-900 dark:text-zinc-50 font-serif tracking-tight">
+                <h1 className="text-3xl md:text-4xl font-bold mb-6 text-zinc-900 dark:text-zinc-50 font-sans tracking-tight">
                     Research
                 </h1>
                 <p className="text-lg text-muted leading-relaxed mb-6 text-justify">
@@ -124,11 +117,11 @@ export default function ResearchPage() {
                 animate="visible"
                 className="mb-20 scroll-mt-32"
             >
-                <h2 className="text-2xl font-bold mb-8 text-zinc-800 dark:text-zinc-100 font-serif">
+                <h2 className="text-2xl font-bold mb-8 text-zinc-800 dark:text-zinc-100 font-sans">
                     Research Themes
                 </h2>
                 <div className="grid gap-8 md:grid-cols-2">
-                    {researchThemes.map((theme) => (
+                    {researchThemes.map((theme, index) => (
                         <motion.div
                             key={theme.id}
                             variants={itemVariants}
@@ -140,6 +133,7 @@ export default function ResearchPage() {
                                     src={theme.image}
                                     alt={theme.title}
                                     fill
+                                    loading={index === 0 ? "eager" : "lazy"}
                                     className="object-cover transition-transform duration-500 group-hover:scale-105"
                                 />
                                 <div className="absolute inset-0 bg-gradient-to-t from-background/90 via-background/20 to-transparent" />
@@ -147,7 +141,7 @@ export default function ResearchPage() {
 
                             {/* Content */}
                             <div className="p-6 -mt-12 relative">
-                                <h3 className="text-xl font-bold text-zinc-900 dark:text-zinc-50 font-serif mb-2">
+                                <h3 className="text-xl font-bold text-zinc-900 dark:text-zinc-50 font-sans mb-2">
                                     {theme.title}
                                 </h3>
                                 <p className="text-sm text-accent font-medium mb-3">
@@ -162,67 +156,21 @@ export default function ResearchPage() {
                 </div>
             </motion.section>
 
-            {/* Awards Section */}
-            <motion.section
-                id="awards"
-                variants={containerVariants}
-                initial="hidden"
-                whileInView="visible"
-                viewport={{ once: true, amount: 0.2 }}
-                className="mb-20 scroll-mt-32"
-            >
-                <h2 className="text-2xl font-bold mb-8 text-zinc-800 dark:text-zinc-100 font-serif">
-                    Awards
-                </h2>
-                <div className="grid gap-4">
-                    {awards.map((award, index) => {
-                        const relatedPub = award.relatedPublication
-                            ? publications.find((p) => p.id === award.relatedPublication)
-                            : null;
-                        return (
-                            <motion.div
-                                key={index}
-                                variants={itemVariants}
-                                className="flex items-start gap-4 p-4 bg-secondary/30 dark:bg-secondary/20 rounded-lg border-l-2 border-transparent hover:border-accent hover:bg-accent/5 hover:translate-x-1 transition-all duration-150 ease-out cursor-default"
-                            >
-                                <div className="flex-shrink-0 w-10 h-10 bg-accent/10 dark:bg-accent/20 rounded-full flex items-center justify-center">
-                                    <Award size={20} className="text-accent" />
-                                </div>
-                                <div className="flex-grow">
-                                    <div className="flex items-baseline gap-2 flex-wrap">
-                                        <span className="text-sm font-medium text-accent">
-                                            {award.year}
-                                        </span>
-                                        <h3 className="font-semibold text-zinc-900 dark:text-zinc-100">
-                                            {award.title}
-                                        </h3>
-                                    </div>
-                                    <p className="text-sm text-muted mt-1">
-                                        {award.organization}
-                                    </p>
-                                    {relatedPub && (
-                                        <Link
-                                            href={`/publications#${relatedPub.id}`}
-                                            className="text-xs text-accent/80 hover:text-accent mt-2 italic block hover:underline transition-colors"
-                                        >
-                                            &ldquo;{relatedPub.title}&rdquo;
-                                        </Link>
-                                    )}
-                                </div>
-                            </motion.div>
-                        );
-                    })}
-                </div>
-            </motion.section>
-
-            {/* View All Publications CTA */}
+            {/* Related Pages */}
             <motion.div
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.5 }}
-                className="text-center"
+                className="flex flex-col sm:flex-row items-center justify-center gap-3"
             >
+                <Link
+                    href="/awards"
+                    className="inline-flex items-center gap-2 px-6 py-3 border border-border bg-secondary/50 text-foreground rounded-lg font-medium hover:border-accent hover:text-accent transition-colors"
+                >
+                    <Trophy size={18} />
+                    View Awards
+                </Link>
                 <Link
                     href="/publications"
                     className="inline-flex items-center gap-2 px-6 py-3 bg-accent text-accent-foreground rounded-lg font-medium hover:bg-accent/90 transition-colors"

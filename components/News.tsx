@@ -1,6 +1,7 @@
 "use client";
 
 import { news } from "@/lib/data";
+import { getPublicationById } from "@/lib/publications";
 import { motion } from "framer-motion";
 import Link from "next/link";
 
@@ -15,7 +16,7 @@ export default function News() {
                 transition={{ duration: 0.4 }}
                 className="flex items-center gap-4 mb-6"
             >
-                <h2 className="text-2xl font-serif font-medium text-foreground">
+                <h2 className="text-2xl font-sans font-medium text-foreground">
                     News
                 </h2>
                 <motion.div
@@ -27,7 +28,12 @@ export default function News() {
             </motion.div>
 
             <div className="flex flex-col gap-4">
-                {news.map((item, index) => (
+                {news.map((item, index) => {
+                    const relatedPublication = item.relatedPublication
+                        ? getPublicationById(item.relatedPublication)
+                        : null;
+
+                    return (
                     <motion.div
                         key={index}
                         initial={{ opacity: 0, x: -10 }}
@@ -35,7 +41,7 @@ export default function News() {
                         transition={{ delay: index * 0.1 }}
                         className="flex flex-col sm:flex-row gap-2 sm:gap-6 text-sm p-3 -ml-3 rounded-lg border-l-2 border-transparent hover:border-accent hover:bg-accent/5 hover:translate-x-1 transition-all duration-150 ease-out cursor-default"
                     >
-                        <div className="w-24 flex-shrink-0 text-accent font-semibold font-serif pt-0.5">
+                        <div className="w-24 flex-shrink-0 text-accent font-semibold font-sans pt-0.5">
                             {item.date}
                         </div>
                         <div className="text-muted-foreground leading-relaxed">
@@ -43,8 +49,8 @@ export default function News() {
                                 <a href={item.url} target="_blank" rel="noreferrer" className="group hover:text-accent transition-colors">
                                     {highlightKeywords(item.content)}
                                 </a>
-                            ) : item.relatedPublication ? (
-                                <Link href={`/publications#${item.relatedPublication}`} className="group hover:text-accent transition-colors">
+                            ) : relatedPublication ? (
+                                <Link href={`/publications/${relatedPublication.slug}`} className="group hover:text-accent transition-colors">
                                     {highlightKeywords(item.content)}
                                 </Link>
                             ) : (
@@ -52,7 +58,8 @@ export default function News() {
                             )}
                         </div>
                     </motion.div>
-                ))}
+                    );
+                })}
             </div>
         </section>
     );

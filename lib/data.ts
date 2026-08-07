@@ -1,16 +1,16 @@
 
 export const profile = {
     name: "Masih Haseli",
-    title: "Postdoctoral Scholar",
+    title: "Postdoctoral Scholar Research Associate",
     institution: "California Institute of Technology (Caltech)",
-    department: "Computing and Mathematical Sciences Department",
+    department: "Department of Computing and Mathematical Sciences",
     email: "mhaseli@caltech.edu",
-    office: "Gates Thomas Laboratory (44)",
+    office: "212 Gates-Thomas Laboratory (44)",
     scholar: "https://scholar.google.com/citations?hl=en&user=Am-rcgMAAAAJ",
     linkedin: "https://www.linkedin.com/in/masih-haseli/",
     image: "/images/profile_photo.png",
     bio: [
-        "I am a postdoctoral scholar in Computing and Mathematical Sciences at Caltech, advised by Prof. Joel W. Burdick. Previously, I was a postdoctoral scholar in the Department of Mechanical and Aerospace Engineering at the University of California San Diego with Prof. Jorge Cortés. I received my Ph.D. in Engineering Sciences (Mechanical Engineering) from the University of California San Diego in 2022.",
+        "I am a postdoctoral scholar research associate in Computing and Mathematical Sciences at Caltech, advised by Prof. Joel W. Burdick. Previously, I was a postdoctoral scholar in the Department of Mechanical and Aerospace Engineering at the University of California San Diego with Prof. Jorge Cortés. I received my Ph.D. in Engineering Sciences (Mechanical Engineering) from the University of California San Diego in 2022.",
         "My research develops theoretically principled, data-driven methods for modeling, analysis, and control of nonlinear dynamical systems, with applications in learning and robotics. I am particularly interested in Koopman operator theory and nonlinear control."
     ]
 };
@@ -47,41 +47,58 @@ export type Link = {
 
 export type Publication = {
     id: string;
+    slug: string;
     title: string;
     authors: string;
     venue: string;
     year: string;
+    journal?: string;
+    conference?: string;
+    volume?: string;
+    issue?: string;
+    pages?: string;
+    articleNumber?: string;
+    doi?: string;
+    publicationDate?: string;
     pdf?: string; // We can link to the PDF if available (e.g. JP9.html -> PDF usually)
     award?: string;
     note?: string;
     type: "journal" | "conference" | "thesis";
     abstract?: string;
-    bibtex?: string;
     links?: Link[];
+    relatedPublications?: string[];
 };
 
 export const publications: Publication[] = [
     // Journals
     {
         id: "JP9",
+        slug: "two-roads-to-koopman-operator-theory-for-control",
         type: "journal",
         title: "Two roads to Koopman operator theory for control: infinite input sequences and operator families",
         authors: "M. Haseli, I. Mezić, J. Cortés",
         venue: "IEEE Transactions on Automatic Control",
+        journal: "IEEE Transactions on Automatic Control",
         year: "submitted",
         pdf: "/Material/JP/2025_HaMeCo-tac.pdf",
         abstract: "The Koopman operator, originally defined for dynamical systems without input, has inspired many applications in control. Yet, the theoretical foundations underpinning this progress in control remain underdeveloped. This paper investigates the theoretical structure and connections between two extensions of Koopman theory to control: (i) Koopman operator via infinite input sequences and (ii) the Koopman control family. Although these frameworks encode system information in fundamentally different ways, we show that under certain conditions on the function spaces they operate on, they are equivalent. The equivalence is both in terms of the actions of the Koopman-based formulations in each framework as well as the function values on the system trajectories. Our analysis provides constructive tools to translate between the frameworks, offering a unified perspective for Koopman methods in control.",
         links: [
             { name: "PDF", url: "/Material/JP/2025_HaMeCo-tac.pdf" },
             { name: "arXiv", url: "https://arxiv.org/abs/2510.15166" }
-        ]
+        ],
+        relatedPublications: ["CP5"]
     },
     {
         id: "JP5",
+        slug: "modeling-nonlinear-control-systems-via-koopman-control-family",
         type: "journal",
         title: "Modeling nonlinear control systems via Koopman control family: universal forms and subspace invariance proximity",
         authors: "M. Haseli, J. Cortés",
         venue: "Automatica 185",
+        journal: "Automatica",
+        volume: "185",
+        articleNumber: "112722",
+        doi: "10.1016/j.automatica.2025.112722",
         year: "2026",
         note: "112722",
         pdf: "/Material/JP/2023_HaCo-auto.pdf",
@@ -93,11 +110,30 @@ export const publications: Publication[] = [
         ]
     },
     {
+        id: "JP10",
+        slug: "existence-koopman-linear-embeddings-controlled-nonlinear-systems",
+        type: "journal",
+        title: "On the existence of Koopman linear embeddings for controlled nonlinear systems",
+        authors: "X. Shang, M. Haseli, J. Cortés, Y. Zheng",
+        venue: "IEEE Transactions on Automatic Control",
+        journal: "IEEE Transactions on Automatic Control",
+        year: "submitted",
+        abstract: "Koopman linear representations have become a popular tool for control design of nonlinear systems, yet it remains unclear when such representations are exact. We establish sufficient and necessary conditions under which a controlled nonlinear system admits an exact finite-dimensional Koopman linear representation, termed a Koopman linear embedding. We show that such a system must be transformable into a special control-affine preserved structure, which enforces affine dependence of the state on the control input and isolates all nonlinearities into an autonomous subsystem. This autonomous subsystem must itself admit a finite-dimensional Koopman linear model with a sufficiently rich Koopman-invariant subspace. We also introduce a symbolic procedure to determine whether a given controlled nonlinear system admits this structure, clarifying whether Koopman approximation errors arise from intrinsic system dynamics or from the choice of lifting functions.",
+        links: [
+            { name: "arXiv", url: "https://arxiv.org/abs/2602.14537" }
+        ]
+    },
+    {
         id: "JP8",
+        slug: "recursive-forward-backward-edmd",
         type: "journal",
         title: "Recursive forward-backward EDMD: guaranteed algebraic search for Koopman invariant subspaces",
         authors: "M. Haseli, J. Cortés",
         venue: "IEEE Access 13",
+        journal: "IEEE Access",
+        volume: "13",
+        pages: "61006-61025",
+        doi: "10.1109/ACCESS.2025.3554154",
         year: "2025",
         note: "61006-61025",
         pdf: "/Material/JP/2024_HaCo-access.pdf",
@@ -110,24 +146,33 @@ export const publications: Publication[] = [
     },
     {
         id: "JP7",
+        slug: "koopman-operators-in-robot-learning",
         type: "journal",
         title: "Koopman operators in robot learning",
         authors: "L. Shi, M. Haseli, G. Mamakoukas, D. Bruder, I. Abraham, T. Murphey, J. Cortés, K. Karydis",
-        venue: "IEEE Transactions on Robotics",
-        year: "to appear",
+        venue: "IEEE Transactions on Robotics 42",
+        journal: "IEEE Transactions on Robotics",
+        volume: "42",
+        pages: "1088-1107",
+        doi: "10.1109/TRO.2026.3654384",
+        year: "2026",
+        note: "1088-1107",
         pdf: "/Material/JP/2024_ShHaMaBrAbMuCoKa-tr.pdf",
-        abstract: "Koopman operator theory offers a rigorous treatment of dynamics and has been emerging as a powerful modeling and learning-based control method enabling significant advancements across various domains of robotics. Due to its ability to represent nonlinear dynamics as a linear operator, Koopman theory offers a fresh lens through which to understand and tackle the modeling and control of complex robotic systems. Moreover, it enables incremental updates and is computationally inexpensive making it particularly appealing for real-time applications and online active learning. This review comprehensively presents recent research results on advancing Koopman operator theory across diverse domains of robotics, encompassing aerial, legged, wheeled, underwater, soft, and manipulator robotics. Furthermore, it offers practical tutorials to help new users get started as well as a treatise of more advanced topics leading to an outlook on future directions and open research questions. Taken together, these provide insights into the potential evolution of Koopman theory as applied to the field of robotics.",
+        abstract: "Koopman operator theory offers a rigorous treatment of dynamics and has been emerging as an alternative modeling and learning-based control method across various robotics sub-domains. Due to its ability to represent nonlinear dynamics as a linear (but higher-dimensional) operator, Koopman theory offers a fresh lens through which to understand and tackle the modeling and control of complex robotic systems. Moreover, it enables incremental updates and is computationally inexpensive, thus making it particularly appealing for real-time applications and online active learning. This review delves deeply into the foundations of Koopman operator theory and systematically builds a bridge from theoretical principles to practical robotic applications. We begin by explaining the mathematical underpinnings of the Koopman framework and discussing approximation approaches for incorporating inputs into Koopman-based modeling. Foundational considerations, such as data collection strategies as well as the design of lifting functions for effective system embedding, are also discussed. We then explore how Koopman-based models serve as a unifying tool for a range of robotics tasks, including model-based control, real-time state estimation, and motion planning. The review proceeds to a survey of cutting-edge research that demonstrates the versatility and growing impact of Koopman methods across diverse robotics sub-domains: from aerial and legged platforms to manipulators, soft-bodied systems, and multi-agent networks. A presentation of more advanced theoretical topics, necessary to push forward the overall framework, is included. Finally, we reflect on some key open challenges that remain and articulate future research directions that will shape the next phase of Koopman-inspired robotics. To support practical adoption, we provide a hands-on tutorial with executable code at https://shorturl.at/ouE59.",
         links: [
             { name: "PDF", url: "/Material/JP/2024_ShHaMaBrAbMuCoKa-tr.pdf" },
-            { name: "arXiv", url: "https://arxiv.org/abs/2408.04200" }
+            { name: "arXiv", url: "https://arxiv.org/abs/2408.04200" },
+            { name: "IEEE Xplore", url: "https://ieeexplore.ieee.org/document/11353937" }
         ]
     },
     {
         id: "JP6",
+        slug: "invariance-proximity",
         type: "journal",
         title: "Invariance proximity: closed-form error bounds for finite-dimensional Koopman-based models",
         authors: "M. Haseli, J. Cortés",
-        venue: "Systems and Control Letters",
+        venue: "Systems & Control Letters",
+        journal: "Systems & Control Letters",
         year: "submitted",
         pdf: "/Material/JP/2024_HaCo-scl.pdf",
         abstract: "A popular way to approximate the Koopman operator's action on a finite-dimensional subspace of functions is via orthogonal projections. The quality of the projected model directly depends on the selected subspace, specifically on how close it is to being invariant under the Koopman operator. The notion of invariance proximity provides a tight upper bound on the worst-case relative prediction error of the finite-dimensional model. However, its direct calculation is computationally challenging. This paper leverages the geometric structure behind the definition of invariance proximity to provide a closed-form expression in terms of Jordan principal angles on general inner product spaces. Unveiling this connection allows us to exploit specific isomorphisms to circumvent the computational challenges associated with spaces of functions and enables the use of existing efficient numerical routines to compute invariance proximity.",
@@ -138,10 +183,15 @@ export const publications: Publication[] = [
     },
     {
         id: "JP4",
+        slug: "generalizing-dynamic-mode-decomposition",
         type: "journal",
         title: "Generalizing dynamic mode decomposition: balancing accuracy and expressiveness in Koopman approximations",
         authors: "M. Haseli, J. Cortés",
         venue: "Automatica 153",
+        journal: "Automatica",
+        volume: "153",
+        articleNumber: "111001",
+        doi: "10.1016/j.automatica.2023.111001",
         year: "2023",
         note: "111001",
         pdf: "/Material/JP/2021_HaCo-auto.pdf",
@@ -150,14 +200,20 @@ export const publications: Publication[] = [
             { name: "PDF", url: "/Material/JP/2021_HaCo-auto.pdf" },
             { name: "arXiv", url: "https://arxiv.org/abs/2108.03712" },
             { name: "ScienceDirect", url: "https://doi.org/10.1016/j.automatica.2023.111001" }
-        ]
+        ],
+        relatedPublications: ["CP4"]
     },
     {
         id: "JP3",
+        slug: "temporal-forward-backward-consistency",
         type: "journal",
         title: "Temporal forward-backward consistency, not residual error, measures the prediction accuracy of extended dynamic mode decomposition",
         authors: "M. Haseli, J. Cortés",
         venue: "IEEE Control Systems Letters 7",
+        journal: "IEEE Control Systems Letters",
+        volume: "7",
+        pages: "649-654",
+        doi: "10.1109/LCSYS.2022.3214476",
         year: "2023",
         note: "649-654",
         award: "2025 IEEE Control Systems Letters Outstanding Paper Award",
@@ -166,16 +222,21 @@ export const publications: Publication[] = [
         links: [
             { name: "PDF", url: "/Material/JP/2022_HaCo-csl.pdf" },
             { name: "arXiv", url: "https://arxiv.org/abs/2207.07719" },
-            { name: "IEEEXplore", url: "https://doi.org/10.1109/LCSYS.2022.3214476" },
-            { name: "YouTube", url: "https://www.youtube.com/watch?v=H-T8vUXV2IU&ab_channel=USACMStudentChapter" }
+            { name: "IEEEXplore", url: "https://doi.org/10.1109/LCSYS.2022.3214476" }
         ]
     },
     {
         id: "JP2",
+        slug: "parallel-learning-koopman-eigenfunctions",
         type: "journal",
         title: "Parallel learning of Koopman eigenfunctions and invariant subspaces for accurate long-term prediction",
         authors: "M. Haseli, J. Cortés",
         venue: "IEEE Transactions on Control of Network Systems 8 (4)",
+        journal: "IEEE Transactions on Control of Network Systems",
+        volume: "8",
+        issue: "4",
+        pages: "1833-1845",
+        doi: "10.1109/TCNS.2021.3088791",
         year: "2021",
         note: "1833-1845",
         pdf: "/Material/JP/2020_HaCo-tcns.pdf",
@@ -184,14 +245,21 @@ export const publications: Publication[] = [
             { name: "PDF", url: "/Material/JP/2020_HaCo-tcns.pdf" },
             { name: "arXiv", url: "https://arxiv.org/abs/2005.06138" },
             { name: "IEEEXplore", url: "https://doi.org/10.1109/TCNS.2021.3088791" }
-        ]
+        ],
+        relatedPublications: ["CP3"]
     },
     {
         id: "JP1",
+        slug: "learning-koopman-eigenfunctions-symmetric-subspace-decomposition",
         type: "journal",
-        title: "Learning Koopman eigenfunctions and invariant subspaces from data: symmetric subspace decomposition",
+        title: "Learning Koopman eigenfunctions and invariant subspaces from data: Symmetric Subspace Decomposition",
         authors: "M. Haseli, J. Cortés",
         venue: "IEEE Transactions on Automatic Control 67 (7)",
+        journal: "IEEE Transactions on Automatic Control",
+        volume: "67",
+        issue: "7",
+        pages: "3442-3457",
+        doi: "10.1109/TAC.2021.3105318",
         year: "2022",
         note: "3442-3457",
         pdf: "/Material/JP/2020_HaCo-tac.pdf",
@@ -200,65 +268,91 @@ export const publications: Publication[] = [
             { name: "PDF", url: "/Material/JP/2020_HaCo-tac.pdf" },
             { name: "arXiv", url: "https://arxiv.org/abs/1909.01419" },
             { name: "IEEEXplore", url: "https://doi.org/10.1109/TAC.2021.3105318" }
-        ]
+        ],
+        relatedPublications: ["CP2"]
     },
 
     // Conferences
     {
+        id: "CP7",
+        slug: "control-forward-backward-consistency-koopman-control-family",
+        type: "conference",
+        title: "Control forward-backward consistency: quantifying the accuracy of Koopman control family models",
+        authors: "M. Haseli, J. Cortés, J. W. Burdick",
+        venue: "Proceedings of the IEEE Conference on Decision and Control, Honolulu, Hawaii",
+        conference: "IEEE Conference on Decision and Control",
+        year: "2026",
+        note: "To appear",
+        abstract: "This paper extends the forward-backward consistency index, originally introduced in Koopman modeling of systems without input, to the setting of control systems, providing a closed-form computable measure of accuracy for data-driven models associated with the Koopman Control Family. Building on a forward-backward regression perspective, we introduce the control forward-backward consistency matrix and demonstrate several favorable properties. Our main result establishes that the relative root-mean-square error of Koopman Control Family function predictors is strictly bounded by the square root of the control consistency index, defined as the maximum eigenvalue of the consistency matrix. This provides a sharp, closed-form computable error bound for finite-dimensional models. We further specialize this bound to widely used lifted linear and bilinear models, discuss how the control consistency index can be incorporated into optimization-based modeling, and illustrate the methodology through simulations.",
+        links: [
+            { name: "arXiv", url: "https://arxiv.org/abs/2603.27548" }
+        ]
+    },
+    {
         id: "CP5",
+        slug: "koopman-operator-extensions-for-control",
         type: "conference",
         title: "Koopman operator extensions for control: bridging infinite input sequences and operator families",
         authors: "M. Haseli, I. Mezić, J. Cortés",
-        venue: "Proceedings of the IEEE Conference on Decision and Control, Rio de Janeiro, Brazil",
+        venue: "Proceedings of the 64th IEEE Conference on Decision and Control, Rio de Janeiro, Brazil",
+        conference: "2025 IEEE 64th Conference on Decision and Control (CDC)",
+        pages: "1741-1746",
+        doi: "10.1109/CDC57313.2025.11312881",
+        publicationDate: "2025-12-09",
         year: "2025",
-        note: "To appear",
+        note: "pp. 1741-1746",
         abstract: "This paper investigates the connections between two existing formal extensions of Koopman operator theory to general discrete-time control systems that are not necessarily control-affine. The frameworks, namely (i) Koopman operator via infinite input sequences and (ii) Koopman control family, encode the system behavior in fundamentally different ways and rely on different function spaces. In spite of this, we connect the frameworks by defining operations that allow to go from one function space to the other, and provide precise conditions that ensure the function spaces capture the same information. Moreover, we prove that under these conditions the formal approaches are equivalent in terms of encoding the state information and multi-step trajectories in function values.",
+        links: [
+            { name: "IEEE Xplore", url: "https://ieeexplore.ieee.org/document/11312881" }
+        ],
+        relatedPublications: ["JP9"]
     },
     {
         id: "CP6",
+        slug: "real-time-learning-predictive-dynamic-obstacle-models",
         type: "conference",
         title: "Real-time learning of predictive dynamic obstacle models for robotic motion planning",
-        authors: "S. B. Kombo, M. Haseli, Skylar X. Wei, J. W. Burdick",
-        venue: "Proceedings of the IEEE International Conference on Robotics and Automation",
+        authors: "S. Kombo, M. Haseli, S. X. Wei, J. W. Burdick",
+        venue: "Proceedings of the IEEE International Conference on Robotics and Automation, Vienna, Austria",
+        conference: "IEEE International Conference on Robotics and Automation",
         year: "2026",
-        note: "Submitted",
-        abstract: "Autonomous systems often must predict the motions of nearby agents from partial and noisy data. This paper asks and answers the question: \"can we learn, in real-time, a nonlinear predictive model of another agent's motions?\" Our online framework denoises and forecasts such dynamics using a modified sliding-window Hankel Dynamic Mode Decomposition (Hankel-DMD). Partial noisy measurements are embedded into a Hankel matrix, while an associated Page matrix enables singular-value hard thresholding (SVHT) to estimate the effective rank. A Cadzow projection enforces structured low-rank consistency, yielding a denoised trajectory and local noise variance estimates. From this representation, a time-varying Hankel-DMD lifted linear predictor is constructed for multi-step forecasts. The residual analysis provides variancetracking signals that can support downstream estimators and risk-aware planning. We validate the approach in simulation under Gaussian and heavy-tailed noise, and experimentally on a dynamic crane testbed. Results show that the method achieves stable variance-aware denoising and short-horizon prediction suitable for integration into real-time control frameworks.",
-    },
-    {
-        id: "CP3_conf", // Reusing JP3 title but it's ACC 2023 proceeding
-        type: "conference",
-        title: "Temporal forward-backward consistency, not residual error, measures the prediction accuracy of extended dynamic mode decomposition",
-        authors: "M. Haseli, J. Cortés",
-        venue: "Proceedings of the American Control Conference, San Diego",
-        year: "2023",
-        pdf: "/Material/JP/2022_HaCo-csl.pdf", // Reusing Journal PDF
-        abstract: "Extended Dynamic Mode Decomposition (EDMD) is a popular data-driven method to approximate the action of the Koopman operator on a linear function space spanned by a dictionary of functions. The accuracy of EDMD model critically depends on the quality of the particular dictionary's span, specifically on how close it is to being invariant under the Koopman operator. Motivated by the observation that the residual error of EDMD, typically used for dictionary learning, does not encode the quality of the function space and is sensitive to the choice of basis, we introduce the novel concept of consistency index. We show that this measure, based on using EDMD forward and backward in time, enjoys a number of desirable qualities that make it suitable for data-driven modeling of dynamical systems: it measures the quality of the function space, it is invariant under the choice of basis, can be computed in closed form from the data, and provides a tight upper-bound for the relative root mean square error of all function predictions on the entire span of the dictionary.",
+        note: "To appear",
+        abstract: "Autonomous systems often must predict the motions of nearby agents from partial and noisy data. This paper asks and answers the question: \"can we learn, in real-time, a nonlinear predictive model of another agent's motions?\" Our online framework denoises and forecasts such dynamics using a modified sliding-window Hankel Dynamic Mode Decomposition (Hankel-DMD). Partial noisy measurements are embedded into a Hankel matrix, while an associated Page matrix enables singular-value hard thresholding (SVHT) to estimate the effective rank. A Cadzow projection enforces structured low-rank consistency, yielding a denoised trajectory and local noise variance estimates. From this representation, a time-varying Hankel-DMD lifted linear predictor is constructed for multi-step forecasts. The residual analysis provides variance-tracking signals that can support downstream estimators and risk-aware planning. We validate the approach in simulation under Gaussian and heavy-tailed noise, and experimentally on a dynamic crane testbed. Results show that the method achieves stable variance-aware denoising and short-horizon prediction suitable for integration into real-time control frameworks.",
         links: [
-            { name: "PDF", url: "/Material/JP/2022_HaCo-csl.pdf" }
+            { name: "arXiv", url: "https://arxiv.org/abs/2511.00814" }
         ]
     },
     {
         id: "CP4",
+        slug: "data-driven-approximation-koopman-invariant-subspaces",
         type: "conference",
         title: "Data-driven approximation of Koopman-invariant subspaces with tunable accuracy",
         authors: "M. Haseli, J. Cortés",
         venue: "Proceedings of the American Control Conference, New Orleans, Louisiana",
+        conference: "2021 American Control Conference (ACC)",
+        pages: "470-475",
+        doi: "10.23919/ACC50511.2021.9483259",
         year: "2021",
-        note: "pp. 469-474",
-        award: "2021 ACC Best Student Paper Award",
+        note: "pp. 470-475",
+        award: "Best Student Paper Award, 2021 American Control Conference",
         pdf: "/Material/CP/2021_HaCo-acc.pdf",
         abstract: "This paper studies the problem of identifying finite-dimensional functional spaces that are close (within a predefined level of accuracy) to being invariant under the application of the Koopman operator. Given a dictionary of functions spanning a finite-dimensional functional space and a set of data snapshots gathered from a potentially nonlinear dynamical system, we define a measure of how close a functional space in the span of the dictionary is to being invariant under the Koopman operator. This measure provides a way of determining the prediction accuracy of the functional space. Given a desired level of accuracy, we propose a numerical algorithm, termed Tunable Symmetric Subspace Decomposition (T-SSD), to find a dictionary of functions with elements in the span of the original dictionary that satisfies it. Starting from the original dictionary, the T-SSD algorithm proceeds by iteratively removing the functions that violate the accuracy bound. We prove that T-SSD converges to a dictionary satisfying the accuracy criteria after a finite number of iterations. A simulation example demonstrates the efficacy of our method.",
         links: [
             { name: "PDF", url: "/Material/CP/2021_HaCo-acc.pdf" },
             { name: "IEEEXplore", url: "https://doi.org/10.23919/ACC50511.2021.9483259" }
-        ]
+        ],
+        relatedPublications: ["JP4"]
     },
     {
         id: "CP3",
+        slug: "fast-identification-koopman-invariant-subspaces",
         type: "conference",
         title: "Fast identification of Koopman-invariant subspaces: parallel symmetric subspace decomposition",
         authors: "M. Haseli, J. Cortés",
         venue: "Proceedings of the American Control Conference, Denver, Colorado",
+        conference: "2020 American Control Conference (ACC)",
+        pages: "4545-4550",
+        doi: "10.23919/ACC45564.2020.9147223",
         year: "2020",
         note: "pp. 4545-4550",
         pdf: "/Material/CP/2020_HaCo-acc.pdf",
@@ -266,14 +360,19 @@ export const publications: Publication[] = [
         links: [
             { name: "PDF", url: "/Material/CP/2020_HaCo-acc.pdf" },
             { name: "IEEEXplore", url: "https://ieeexplore.ieee.org/document/9147223" }
-        ]
+        ],
+        relatedPublications: ["JP2"]
     },
     {
         id: "CP2",
+        slug: "efficient-identification-linear-evolutions",
         type: "conference",
         title: "Efficient identification of linear evolutions in nonlinear vector fields: Koopman invariant subspaces",
         authors: "M. Haseli, J. Cortés",
         venue: "Proceedings of the IEEE Conference on Decision and Control, Nice, France",
+        conference: "2019 IEEE 58th Conference on Decision and Control (CDC)",
+        pages: "1746-1751",
+        doi: "10.1109/CDC40024.2019.9029955",
         year: "2019",
         note: "pp. 1746-1751",
         pdf: "/Material/CP/2019_HaCo-cdc.pdf",
@@ -281,14 +380,19 @@ export const publications: Publication[] = [
         links: [
             { name: "PDF", url: "/Material/CP/2019_HaCo-cdc.pdf" },
             { name: "IEEEXplore", url: "https://ieeexplore.ieee.org/document/9029955" }
-        ]
+        ],
+        relatedPublications: ["JP1"]
     },
     {
         id: "CP1",
+        slug: "approximating-koopman-operator-using-noisy-data",
         type: "conference",
         title: "Approximating the Koopman operator using noisy data: noise-resilient extended dynamic mode decomposition",
         authors: "M. Haseli, J. Cortés",
         venue: "Proceedings of the American Control Conference, Philadelphia, Pennsylvania",
+        conference: "2019 American Control Conference (ACC)",
+        pages: "5499-5504",
+        doi: "10.23919/ACC.2019.8814684",
         year: "2019",
         note: "pp. 5499-5504",
         pdf: "/Material/CP/2019_HaCo-acc.pdf",
@@ -302,12 +406,13 @@ export const publications: Publication[] = [
     // Thesis
     {
         id: "Thesis",
+        slug: "data-driven-system-analysis-koopman-operator",
         type: "thesis",
         title: "Data-Driven System Analysis Using the Koopman Operator: Eigenfunctions, Invariant Subspaces, and Accuracy Bounds",
         authors: "M. Haseli",
         venue: "University of California, San Diego",
         year: "2022",
-        award: "2023 Robert Skelton Systems and Control Dissertation Award",
+        award: "2023 Robert Skelton Systems and Control Best Ph.D. Dissertation Award",
         pdf: "/Material/JP/PhDThesis-MasihHaseli-22.pdf",
         abstract: "Ranging from natural phenomena such as biological and chemical systems to artificial technologies such as mechanical and electronic devices, dynamical systems form an inseparable part of the world surrounding us. Understanding, modeling, predicting, and controlling such systems have always been the leading goals of science and engineering. While in the past centuries, the most advances in the field of dynamical systems were mainly analytical and based on limited observations, in the last decade, we have witnessed a rapid growth in our ability to gather, store, and process data. This data-driven revolution has imposed a high demand for new viewpoints and systematic structures that can effectively utilize the available modern tools. The Koopman operator theory for dynamical systems has recently emerged as a powerful tool for the analysis and control of nonlinear dynamical systems. It allows for the representation of nonlinear dynamics as a linear operator on an infinite-dimensional space of functions, enabling the use of linear system theory and data-driven methods. This thesis advances the state of the art in data-driven methods for Koopman operator approximation, specifically focusing on the identification of invariant subspaces and eigenfunctions, and providing rigorous error bounds for finite-dimensional approximations.",
         links: [
@@ -332,7 +437,7 @@ export const researchThemes: ResearchTheme[] = [
         title: "Koopman Operator Theory",
         shortDescription: "Linear representations of nonlinear dynamics",
         description: "The Koopman operator represents a dynamical system via a linear operator acting on a vector space of functions. This enables one to utilize regular algebraic structures to study complex nonlinear systems. Based on these algebraic structures, we have established theoretical guarantees (in the form of necessary and sufficient conditions) for accurately identifying Koopman eigenfunctions, eigenvalues, and invariant subspaces. The Symmetric Subspace Decomposition (SSD) algorithm provably identifies the maximal Koopman-invariant subspace and all eigenfunctions in the span of a given dictionary. We have also introduced the notion of invariance proximity, an objective accuracy measure that provides tight upper bounds on prediction error.",
-        image: "/images/koopman_operator.png",
+        image: "/images/koopman_operator.webp",
         relatedPublications: ["JP1", "JP2", "JP3", "JP4", "JP6", "JP8", "Thesis"]
     },
     {
@@ -340,15 +445,15 @@ export const researchThemes: ResearchTheme[] = [
         title: "Rigorous Data-Driven Control",
         shortDescription: "Formal extension of Koopman operator theory to control systems",
         description: "Extending Koopman operator theory to control systems requires addressing the fundamental difference between 'input' and 'state'. We developed the Koopman Control Family (KCF), a comprehensive mathematical framework that fully encapsulates the behavior of general (not necessarily control-affine) nonlinear control systems. This framework leads to universal finite-dimensional forms termed 'input-state separable' models, which encompass commonly used linear, bilinear, and switched linear models as special cases. Our recent work establishes equivalence between KCF and other Koopman extensions for control, providing a unified theoretical foundation. The KCF framework naturally lends itself to rigorous data-driven modeling and robust learning.",
-        image: "/images/data_driven_control.png",
-        relatedPublications: ["JP5", "JP9", "CP5"]
+        image: "/images/data_driven_control.webp",
+        relatedPublications: ["JP5", "JP10", "JP9", "CP7", "CP5"]
     },
     {
         id: "algorithms",
         title: "Scalable Data-Driven Modeling and Prediction",
         shortDescription: "Streaming data sets, parallel computing, and identification with tunable accuracy",
         description: "We have developed a suite of algorithms addressing computational challenges in Koopman-based modeling. The Streaming SSD (SSSD) algorithm enables real-time computation on embedded systems by processing data incrementally with fixed memory. The Parallel SSD (P-SSD) algorithm achieves linear speedup with the number of processors and is robust against packet drops and communication failures. The Tunable SSD (T-SSD) algorithm allows users to balance model accuracy and expressiveness through a single parameter, generalizing both exact SSD and the widely-used EDMD method.",
-        image: "/images/parallel_algorithms.png",
+        image: "/images/parallel_algorithms.webp",
         relatedPublications: ["JP2", "JP4", "CP3", "CP4"]
     },
     {
@@ -356,8 +461,66 @@ export const researchThemes: ResearchTheme[] = [
         title: "Real-Time Algorithms for Robotics",
         shortDescription: "Fast adaptive methods for autonomous systems",
         description: "Koopman operator methods offer unique advantages for robotics: they enable linear computations for nonlinear prediction, support incremental online adaptation as new data arrives, and are computationally efficient enough for real-time execution on embedded systems. These properties make them ideal for path planning and control in complex environments, handling noisy sensor data through robust estimation techniques, and adapting to changing dynamics without expensive retraining—critical capabilities for autonomous robots, self-driving vehicles, and systems operating in unstructured environments.",
-        image: "/images/robotics_realtime.png",
+        image: "/images/robotics_realtime.webp",
         relatedPublications: ["JP7", "CP6", "CP1"]
+    }
+];
+
+export type Talk = {
+    date: string;
+    title: string;
+    event: string;
+    location?: string;
+    url?: string;
+};
+
+export const talks: Talk[] = [
+    {
+        date: "Jun 2026",
+        title: "The Koopman Operator: Truths, Half-Truths, and Beautifully Packaged Lies",
+        event: "Invited Seminar",
+        location: "Department of Mechanical and Aerospace Engineering, University of California, Irvine"
+    },
+    {
+        date: "May 2025",
+        title: "Koopman Control Family and Universal Finite-Dimensional Forms",
+        event: "SIAM Conference on Applications of Dynamical Systems",
+        location: "Denver, Colorado"
+    },
+    {
+        date: "Mar 2024",
+        title: "Closed-Form Error Bounds for Finite-Dimensional Koopman-Based Models and Implications for Learning",
+        event: "U.S. Association for Computational Mechanics, Student Chapter Seminars",
+        location: "Online",
+        url: "https://www.youtube.com/watch?v=H-T8vUXV2IU"
+    },
+    {
+        date: "Jan 2024",
+        title: "Koopman Control Family and Universal Finite-Dimensional Forms",
+        event: "Safe Autonomous Systems Lab Seminars",
+        location: "Department of Mechanical and Aerospace Engineering, University of California, San Diego"
+    },
+    {
+        date: "Sep 2023",
+        title: "Learning Koopman Eigenfunctions and Invariant Subspaces from Data",
+        event: "Scalable Optimization and Control Lab Seminars",
+        location: "Department of Electrical and Computer Engineering, University of California, San Diego"
+    },
+    {
+        date: "Dec 2022",
+        title: "Learning Koopman Eigenfunctions and Invariant Subspaces from Data: Symmetric Subspace Decomposition",
+        event: "2022 International Symposium on Nonlinear Theory and Its Applications"
+    },
+    {
+        date: "Sep 2021",
+        title: "Tuning Accuracy in Data-Driven Learning of Unknown Dynamical Systems via the Koopman Operator",
+        event: "Mechanistic Machine Learning and Digital Twins for Computational Science, Engineering & Technology Conference"
+    },
+    {
+        date: "Jan 2020",
+        title: "Efficient Identification of Linear Evolutions in Nonlinear Vector Fields: Koopman Invariant Subspaces",
+        event: "37th Southern California Control Workshop",
+        location: "University of California, San Diego"
     }
 ];
 
@@ -377,14 +540,24 @@ export const awards: Award[] = [
     },
     {
         year: "2023",
-        title: "Robert Skelton Systems and Control Dissertation Award",
-        organization: "University of California San Diego",
+        title: "Robert Skelton Systems and Control Best Ph.D. Dissertation Award",
+        organization: "UCSD Center for Control Systems and Dynamics",
         relatedPublication: "Thesis"
     },
     {
         year: "2021",
-        title: "ACC Best Student Paper Award",
-        organization: "American Control Conference",
+        title: "Best Student Paper Award",
+        organization: "The 2021 American Control Conference, New Orleans, Louisiana",
         relatedPublication: "CP4"
+    },
+    {
+        year: "2014",
+        title: "Bronze Medal",
+        organization: "Iran's National Mathematics Competition"
+    },
+    {
+        year: "2008",
+        title: "Silver Medal",
+        organization: "Iran's National Physics Olympiad"
     }
 ];

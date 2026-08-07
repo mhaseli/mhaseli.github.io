@@ -3,7 +3,7 @@
 import { useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { Menu, X, FileText, Home, BookOpen, FlaskConical } from "lucide-react";
+import { Menu, X, FileText, Home, BookOpen, FlaskConical, Mic2, Trophy } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { clsx } from "clsx";
 import { ThemeToggle } from "./ThemeToggle";
@@ -12,6 +12,8 @@ const navItems = [
     { name: "Home", href: "/", icon: Home },
     { name: "Research", href: "/research", icon: FlaskConical },
     { name: "Publications", href: "/publications", icon: BookOpen },
+    { name: "Talks", href: "/talks", icon: Mic2 },
+    { name: "Awards", href: "/awards", icon: Trophy },
     { name: "CV", href: "/Material/CV_Masih_Haseli.pdf", icon: FileText, external: true },
 ];
 
@@ -22,19 +24,24 @@ export default function Navbar() {
     return (
         <nav className="fixed top-0 left-0 right-0 z-50 bg-background/80 backdrop-blur-lg border-b border-border transition-colors duration-300">
             <div className="max-w-5xl mx-auto px-6 h-16 flex items-center justify-between">
-                <Link href="/" className="text-xl font-bold tracking-tight text-foreground font-serif">
+                <Link href="/" className="text-xl font-bold tracking-tight text-foreground font-sans">
                     Masih Haseli
                 </Link>
 
                 {/* Desktop Menu */}
-                <div className="hidden md:flex items-center gap-6">
+                <div className="hidden md:flex items-center gap-4 lg:gap-6">
                     {navItems.map((item) => {
-                        const isActive = pathname === item.href;
+                        const isActive = !item.external && (
+                            item.href === "/"
+                                ? pathname === "/"
+                                : pathname === item.href || pathname.startsWith(`${item.href}/`)
+                        );
                         return (
                             <Link
                                 key={item.name}
                                 href={item.href}
                                 target={item.external ? "_blank" : undefined}
+                                rel={item.external ? "noreferrer" : undefined}
                                 className={clsx(
                                     "relative text-sm font-medium transition-colors hover:text-accent py-1",
                                     isActive ? "text-accent" : "text-muted-foreground hover:text-foreground"
@@ -62,6 +69,8 @@ export default function Navbar() {
                     <button
                         className="p-2 text-muted-foreground hover:text-foreground transition-colors"
                         onClick={() => setIsOpen(!isOpen)}
+                        aria-label={isOpen ? "Close navigation menu" : "Open navigation menu"}
+                        aria-expanded={isOpen}
                     >
                         {isOpen ? <X size={24} /> : <Menu size={24} />}
                     </button>
@@ -78,18 +87,29 @@ export default function Navbar() {
                         className="md:hidden border-b border-border bg-background overflow-hidden shadow-lg"
                     >
                         <div className="flex flex-col p-4 gap-4">
-                            {navItems.map((item) => (
-                                <Link
-                                    key={item.name}
-                                    href={item.href}
-                                    target={item.external ? "_blank" : undefined}
-                                    onClick={() => setIsOpen(false)}
-                                    className="flex items-center gap-3 text-base font-medium text-muted-foreground hover:text-accent transition-colors"
-                                >
-                                    <item.icon size={18} />
-                                    {item.name}
-                                </Link>
-                            ))}
+                            {navItems.map((item) => {
+                                const isActive = !item.external && (
+                                    item.href === "/"
+                                        ? pathname === "/"
+                                        : pathname === item.href || pathname.startsWith(`${item.href}/`)
+                                );
+                                return (
+                                    <Link
+                                        key={item.name}
+                                        href={item.href}
+                                        target={item.external ? "_blank" : undefined}
+                                        rel={item.external ? "noreferrer" : undefined}
+                                        onClick={() => setIsOpen(false)}
+                                        className={clsx(
+                                            "flex items-center gap-3 rounded-lg px-2 py-1.5 text-base font-medium transition-colors hover:text-accent",
+                                            isActive ? "bg-accent/10 text-accent" : "text-muted-foreground"
+                                        )}
+                                    >
+                                        <item.icon size={18} />
+                                        {item.name}
+                                    </Link>
+                                );
+                            })}
                         </div>
                     </motion.div>
                 )}
