@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { FileText, ArrowUpRight } from "lucide-react";
+import { FileText, ArrowUpRight, FileBadge, GraduationCap, Medal } from "lucide-react";
 import { awards, publications, type Award } from "@/lib/data";
 import { getPublicationLinks } from "@/lib/publications";
 
@@ -31,6 +31,10 @@ function AwardRow({ honor }: { honor: Award }) {
         ? getPublicationLinks(publication).find((link) => /pdf|journal version/i.test(link.name))
         : null;
 
+    const Icon = publication?.type === "thesis"
+        ? GraduationCap
+        : publication ? FileBadge : Medal;
+
     return (
         <li className="group relative -mx-3 grid gap-2 rounded-2xl border border-transparent px-3 py-6 transition-all duration-300 hover:translate-x-1 hover:border-accent/20 hover:bg-gradient-to-r hover:from-accent/5 hover:to-transparent focus-within:border-accent/20 focus-within:bg-accent/5 motion-reduce:transform-none motion-reduce:transition-none sm:-mx-5 sm:grid-cols-[5rem_minmax(0,1fr)] sm:gap-6 sm:px-5">
             <time dateTime={honor.year} className="pt-0.5 text-base font-semibold tabular-nums text-accent">
@@ -38,8 +42,9 @@ function AwardRow({ honor }: { honor: Award }) {
             </time>
 
             <div className="min-w-0">
-                <h2 className="text-lg font-semibold leading-snug tracking-tight text-foreground transition-colors duration-150 group-hover:text-accent sm:text-xl">
-                    {honor.title}
+                <h2 className="flex items-start gap-2.5 text-lg font-semibold leading-snug tracking-tight text-foreground transition-colors duration-150 group-hover:text-accent sm:text-xl">
+                    <Icon className="mt-1 h-5 w-5 shrink-0 text-accent/70" strokeWidth={1.5} aria-hidden="true" />
+                    <span>{honor.title}</span>
                 </h2>
                 <p className="mt-1.5 text-base leading-relaxed text-muted">
                     {honor.organization}
