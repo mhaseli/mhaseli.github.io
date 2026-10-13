@@ -24,6 +24,11 @@ export type NewsItem = {
 
 export const news: NewsItem[] = [
     {
+        date: "Oct 2026",
+        content: "UCSB CCDC Seminar: Koopman Control Family: Structure, Approximation, and Robust Learning.",
+        url: "/talks/"
+    },
+    {
         date: "Dec 2025",
         content: "Our paper \"Temporal forward-backward consistency, not residual error, measures the prediction accuracy of extended dynamic mode decomposition\" won the 2025 IEEE Control Systems Letters Outstanding Paper Award.",
         relatedPublication: "JP3"
@@ -149,7 +154,7 @@ export const publications: Publication[] = [
         slug: "koopman-operators-in-robot-learning",
         type: "journal",
         title: "Koopman operators in robot learning",
-        authors: "L. Shi, M. Haseli, G. Mamakoukas, D. Bruder, I. Abraham, T. Murphey, J. Cortés, K. Karydis",
+        authors: "L. Shi, M. Haseli, G. Mamakoukas, D. Bruder, I. Abraham, T. D. Murphey, J. Cortés, K. Karydis",
         venue: "IEEE Transactions on Robotics 42",
         journal: "IEEE Transactions on Robotics",
         volume: "42",
@@ -316,7 +321,8 @@ export const publications: Publication[] = [
         venue: "Proceedings of the IEEE International Conference on Robotics and Automation, Vienna, Austria",
         conference: "IEEE International Conference on Robotics and Automation",
         year: "2026",
-        note: "To appear",
+        pages: "14153-14160",
+        note: "pp. 14153-14160",
         abstract: "Autonomous systems often must predict the motions of nearby agents from partial and noisy data. This paper asks and answers the question: \"can we learn, in real-time, a nonlinear predictive model of another agent's motions?\" Our online framework denoises and forecasts such dynamics using a modified sliding-window Hankel Dynamic Mode Decomposition (Hankel-DMD). Partial noisy measurements are embedded into a Hankel matrix, while an associated Page matrix enables singular-value hard thresholding (SVHT) to estimate the effective rank. A Cadzow projection enforces structured low-rank consistency, yielding a denoised trajectory and local noise variance estimates. From this representation, a time-varying Hankel-DMD lifted linear predictor is constructed for multi-step forecasts. The residual analysis provides variance-tracking signals that can support downstream estimators and risk-aware planning. We validate the approach in simulation under Gaussian and heavy-tailed noise, and experimentally on a dynamic crane testbed. Results show that the method achieves stable variance-aware denoising and short-horizon prediction suitable for integration into real-time control frameworks.",
         links: [
             { name: "arXiv", url: "https://arxiv.org/abs/2511.00814" }
@@ -475,6 +481,12 @@ export type Talk = {
 };
 
 export const talks: Talk[] = [
+    {
+        date: "Oct 2026",
+        title: "Koopman Control Family: Structure, Approximation, and Robust Learning",
+        event: "CCDC Seminar Series",
+        location: "Center for Control, Dynamical Systems and Computation, University of California, Santa Barbara"
+    },
     {
         date: "Jun 2026",
         title: "The Koopman Operator: Truths, Half-Truths, and Beautifully Packaged Lies",
